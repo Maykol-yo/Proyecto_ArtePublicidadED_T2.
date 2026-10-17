@@ -1,139 +1,179 @@
+# Proyecto Arte y Publicidad E&D — T2
 
-# Proyecto Arte y Publicidad E&D
+## Bases de Datos Avanzadas y Big Data
 
-## Curso
-**Bases de Datos Avanzadas y Big Data**
+**Universidad:** Universidad Privada del Norte (UPN)  
+**Carrera:** Ingeniería de Sistemas Computacionales  
+**Campus:** Cajamarca  
+**Periodo académico:** 2026-2  
+**NRC:** 16025  
+**Docente:** Patricia Janet Uceda Martos
 
-Ingeniería de Sistemas Computacionales - UPN  
-Periodo académico: 2026-2
+## Integrantes
+
+- Luzmila Chilon Sangay
+- Ruth Berania Huaman Cuenca
+- Maykol Edinson Marin Ortiz
+- Eberth Daniel Sanchez Llamoctanta
 
 ## 1. Descripción del proyecto
 
-El presente proyecto académico desarrolla una solución de Inteligencia de Negocios para la empresa Arte y Publicidad E&D, dedicada a los servicios de diseño gráfico, publicidad, impresión y merchandising.
+Este proyecto académico desarrolla una solución de gestión, integración y análisis de datos para la empresa simulada **Arte y Publicidad E&D**, dedicada a servicios de impresión, diseño gráfico, publicidad y merchandising.
 
-Se construyó una base de datos transaccional con información sintética para simular las operaciones comerciales de la empresa y evaluar los problemas de rendimiento asociados con la generación de reportes históricos de pedidos y ventas.
+La solución utiliza una base de datos transaccional en SQL Server, automatización mediante T-SQL, almacenamiento documental con MongoDB, un Data Mart dimensional, procesos ETL con SQL Server Integration Services (SSIS), consultas OLAP y visualizaciones mediante Power BI.
 
-## 2. Problema identificado
+Se emplean datos sintéticos para realizar las pruebas y evaluaciones.
 
-El crecimiento de los registros históricos puede ocasionar dificultades en el rendimiento de las consultas comerciales.
+## 2. Objetivo del proyecto
 
-Se busca evaluar cómo la optimización de consultas y la implementación de un Data Mart contribuyen a mejorar el procesamiento y análisis de información.
+Implementar y evaluar una solución de bases de datos avanzadas y análisis de información que permita mejorar la organización, integración, procesamiento y consulta de los datos de pedidos y ventas de Arte y Publicidad E&D.
 
-## 3. Objetivo del proyecto
+## 3. Tecnologías utilizadas
 
-Implementar y evaluar una solución de Inteligencia de Negocios mediante SQL Server, programación T-SQL, modelado dimensional, procesos ETL y Power BI, complementada con ejercicios NoSQL y una propuesta inicial de arquitectura Big Data.
+| Tecnología | Aplicación |
+|---|---|
+| Microsoft SQL Server | Base de datos transaccional y Data Mart |
+| SQL Server Management Studio | Consultas, procedimientos y validaciones |
+| MongoDB Compass y mongosh | Gestión documental y operaciones CRUD |
+| Visual Studio + SSIS | Diseño y ejecución de procesos ETL |
+| Power BI Desktop | Dashboard comercial e indicadores |
+| GitHub | Almacenamiento de scripts, proyectos y evidencias |
 
-## 4. Tecnologías utilizadas
+## 4. Componentes desarrollados
 
-- Microsoft SQL Server
-- SQL Server Management Studio (SSMS)
-- MongoDB y MongoDB Compass
-- Microsoft Power BI Desktop
-- T-SQL
-- DAX
-- GitHub
+### 4.1. Base de datos transaccional
 
-## 5. Bases de datos
+Se implementó `BD_ArtePublicidadED`, con tablas relacionadas para administrar clientes, empleados, servicios, pedidos, detalles de pedidos y otras operaciones de negocio.
 
-### Base transaccional
-`BD_ArtePublicidadED`
+Se generaron datos sintéticos para simular el funcionamiento histórico de la empresa.
 
-Almacena clientes, servicios, cotizaciones, pedidos, pagos, compras y materiales.
+### 4.2. Automatización con SQL Server
 
-### Data Mart
-`DW_ArtePublicidadED`
+Se implementaron objetos de base de datos como procedimientos almacenados, vistas, funciones, triggers y transacciones.
 
-Implementa un modelo dimensional tipo estrella para analizar los pedidos y ventas históricos.
+También se realizaron pruebas de integridad, auditoría y recuperación mediante rollback.
 
-### Base NoSQL
-`BD_ArtePublicidadED_NoSQL`
+### 4.3. Base de datos NoSQL
 
-Contiene documentos con las especificaciones de servicios personalizados.
+Se implementó `BD_ArtePublicidadED_NoSQL` en MongoDB, con la colección `pedidosPersonalizadosT2`.
 
-## 6. Estructura del proyecto
+Se realizaron operaciones CRUD, consultas y verificaciones sobre documentos con distintas especificaciones de servicios.
 
-Las carpetas contienen:
+### 4.4. Data Mart y procesamiento ETL
 
-**1_base de datos:** scripts de creación, generación de datos sintéticos y verificaciones.
+Se creó `DW_ArtePublicidadED` utilizando un modelo dimensional de tipo estrella.
 
-**2_Automatizacion:** procedimientos almacenados, vistas, funciones, triggers y transacciones.
+El modelo incluye:
 
-**3_NoSQL:** implementación y pruebas de operaciones CRUD en MongoDB.
+- `DimCliente`
+- `DimServicio`
+- `DimEmpleado`
+- `DimFecha`
+- `DimEstadoPedido`
+- `FactVentas`
 
-**4_DATA_MART_ETL:** diseño dimensional, procedimiento ETL, auditoría y validaciones.
+Se implementaron procesos ETL en T-SQL con controles de calidad, auditoría de carga y verificación de importes.
 
-**5_BI_OLAP:** consultas analíticas, modelo Power BI y dashboard comercial.
+### 4.5. Integración de datos mediante SSIS
 
-**6_EXPERIMENTACION:** scripts, mediciones, diseño experimental y evidencias.
+Se desarrolló un proyecto en Visual Studio utilizando **SQL Server Integration Services (SSIS)**.
 
-**7_Informe:** documentación académica e informe T2.
+El proyecto contiene cinco paquetes:
 
-## 7. Implementación
+| Paquete | Función |
+|---|---|
+| `00_Master.dtsx` | Ejecuta los paquetes en orden |
+| `01_Extract_Staging.dtsx` | Extrae y carga datos en staging |
+| `02_Load_Dimensions.dtsx` | Carga y actualiza dimensiones |
+| `03_Load_FactVentas.dtsx` | Inserta ventas pendientes |
+| `04_Validaciones.dtsx` | Comprueba integridad, duplicados e importes |
 
-### SQL Server
-1. Crear la base de datos transaccional.
-2. Ejecutar la generación de datos sintéticos.
-3. Ejecutar las verificaciones de integridad.
-4. Implementar los objetos de automatización T-SQL.
-5. Crear el Data Mart dimensional.
-6. Ejecutar el procedimiento ETL.
-7. Validar la carga y los indicadores.
+El paquete Master ejecuta secuencialmente los cuatro procesos y fue probado satisfactoriamente en Visual Studio.
 
-### MongoDB
-Ejecutar los scripts JavaScript del directorio NoSQL en el orden indicado para demostrar las operaciones CREATE, READ, UPDATE y DELETE.
+**Ruta del proyecto SSIS:** `BD_proyecto_t2/4_DATA_MART_ETL/SSIS/`
 
-### Power BI
-Abrir el archivo `Dashboard_ArtePublicidadED_T2.pbix` y configurar la conexión a `DW_ArtePublicidadED`.
+El proyecto incluye el archivo de solución `.slnx`, el archivo `.dtproj`, los paquetes `.dtsx` y los administradores de conexión.
 
-## 8. Resultados obtenidos
+### 4.6. Business Intelligence y OLAP
 
-En las verificaciones realizadas se registraron:
+Se realizaron consultas analíticas para estudiar las ventas por mes, categoría de servicio y tipo de cliente.
 
-- 30 119 filas en la tabla de hechos.
-- 0 registros rechazados durante la carga ETL.
-- Cargas ETL repetidas sin duplicación de hechos.
-- Importe de pedidos entregados en 2025: 4 511 603,65.
-- Diferencia monetaria entre OLTP y Data Mart: 0,00.
+Se creó un dashboard en Power BI con indicadores comerciales y filtros interactivos para analizar los pedidos entregados durante 2025.
 
-### Resultados experimentales
+### 4.7. Experimentación
 
-Se compararon tres escenarios con cinco repeticiones por condición.
+Se evaluaron tres escenarios de consulta sobre datos sintéticos:
 
-| Escenario | Mediana (ms) |
-|-----------|-------------:|
-| EXP-01: Consulta original | 176,159 |
-| EXP-02: Consulta modificada | 37,883 |
-| EXP-03: Consulta Data Mart | 28,103 |
+| Escenario | Mediana | P95 descriptivo |
+|---|---:|---:|
+| EXP-01: Consulta original | 176,159 ms | 195,812 ms |
+| EXP-02: Consulta modificada | 37,883 ms | 45,365 ms |
+| EXP-03: Consulta al Data Mart | 28,103 ms | 29,637 ms |
 
-Los valores corresponden a una corrida experimental con datos sintéticos y no representan mediciones de una empresa real.
+Se realizaron cinco repeticiones por escenario y se verificaron 48 grupos de análisis, sin diferencias detectadas en los importes.
 
-## 9. Inteligencia de Negocios
+En esta ejecución experimental, el Data Mart presentó la menor mediana de duración.
 
-El dashboard de Power BI incluye:
+## 5. Resultados de validación del ETL SSIS
 
-- Indicador de pedidos entregados.
-- Análisis mensual de ventas.
-- Comparación por categoría de servicio.
-- Comparación por tipo de cliente.
-- Filtros interactivos por categoría y mes.
+Después de ejecutar el paquete `00_Master.dtsx`, se obtuvieron los siguientes resultados:
 
-## 10. Evidencias
+| Indicador | Resultado |
+|---|---:|
+| Filas cargadas en staging | 30 119 |
+| Registros en FactVentas | 30 119 |
+| Detalles de pedido únicos | 30 119 |
+| Registros duplicados | 0 |
+| Ventas pendientes | 0 |
+| Importe neto total | 20 463 594,40 |
 
-Las carpetas del proyecto contienen scripts ejecutables y capturas que documentan la implementación y las pruebas.
+Las verificaciones confirmaron la consistencia de los recuentos e importes después de ejecutar el proceso completo.
 
-## 11. Consideraciones éticas
+El resultado de **4 511 603,65** corresponde específicamente al análisis de pedidos entregados durante 2025.
 
-El proyecto utiliza datos sintéticos generados con fines académicos.
+## 6. Estructura del repositorio
 
-Los resultados experimentales se limitan al entorno, los datos y las condiciones evaluadas.
+El directorio principal `BD_proyecto_t2` organiza los materiales del proyecto en las siguientes áreas:
 
-Se empleó asistencia de inteligencia artificial durante el desarrollo y documentación del proyecto. El código y los resultados requieren validación por parte del equipo.
+1. Base de datos: scripts de creación, generación de datos y verificaciones.
+2. Automatización: objetos SQL y pruebas transaccionales.
+3. NoSQL: comandos MongoDB y evidencias CRUD.
+4. Data Mart y ETL: modelo dimensional, scripts, validaciones, evidencias y proyecto SSIS.
+5. BI y OLAP: consultas analíticas y dashboard Power BI.
+6. Experimentación: escenarios, mediciones y resultados.
+7. Informe: documentación académica y referencias.
 
-## 12. Estado del proyecto
+## 7. Ejecución del proyecto SSIS
 
-Implementación de SQL Server, NoSQL, Data Mart, ETL y Power BI desarrollada para la T2.
+Para revisar y ejecutar la solución:
 
-La arquitectura distribuida Big Data queda como propuesta para las siguientes etapas académicas.
+1. Tener instalado SQL Server y restaurar o preparar las bases de datos requeridas.
+2. Abrir Visual Studio con la extensión SQL Server Integration Services Projects.
+3. Abrir la solución `Integration Services Project1.slnx`.
+4. Configurar las conexiones `CM_ArtePublicidad_OLTP` y `CM_ArtePublicidad_DW` según el entorno local.
+5. Verificar la existencia de las tablas y datos de origen y destino.
+6. Abrir y ejecutar `00_Master.dtsx`.
+7. Revisar los resultados y verificar las cantidades e importes en SQL Server.
 
----
-**Universidad Privada del Norte - 2026**
+**Precaución:** los paquetes están diseñados para el entorno académico utilizado en las pruebas. Antes de ejecutarlos en otra instalación se deben revisar las conexiones, los datos iniciales y las condiciones de recarga.
+
+## 8. Evidencias
+
+El repositorio incluye capturas de las consultas SQL, operaciones MongoDB, validaciones del Data Mart, visualizaciones de Power BI y ejecuciones SSIS.
+
+Entre las evidencias finales del proceso SSIS se encuentran:
+
+- `CAP-33`: primera carga SSIS.
+- `CAP-34`: validación inicial de staging.
+- `CAP-35` y `CAP-36`: recarga y comprobación de duplicados.
+- `CAP-37` y `CAP-38`: carga y validación de dimensiones.
+- `CAP-39` y `CAP-40`: ejecución y validación de FactVentas.
+- `CAP-41`: validaciones SSIS.
+- `CAP-42`: ejecución del paquete Master.
+- `CAP-43`: validación final del Data Mart.
+
+## 9. Consideraciones académicas
+
+Este repositorio corresponde a un proyecto universitario desarrollado con fines de aprendizaje y evaluación.
+
+Los datos utilizados son sintéticos y no representan registros reales ni resultados operativos de la empresa Arte y Publicidad E&D.
