@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CM_ArtePublicidad_DW"
+  DTS:DTSID="{3E6B5973-4E9D-42AC-8E22-B4481F0AC714}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=EDINSON\SQLEXPRESS;Initial Catalog=DW_ArtePublicidadED;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Integration Services Project1-{3E6B5973-4E9D-42AC-8E22-B4481F0AC714}EDINSON\SQLEXPRESS.DW_ArtePublicidadED;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

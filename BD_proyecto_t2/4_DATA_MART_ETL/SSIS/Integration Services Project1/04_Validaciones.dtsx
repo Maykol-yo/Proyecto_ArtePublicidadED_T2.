@@ -1,0 +1,58 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/17/2026 12:41:21 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="EDINSON"
+  DTS:CreatorName="Edinson\Maykol"
+  DTS:DTSID="{E9DE2C7E-C850-42D3-8AA2-F2F5E70118F1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="10250"
+  DTS:ObjectName="04_Validaciones"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{2F8950D8-E237-4915-AAC4-E622DF479B45}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Validar_Calidad_Datos"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{A60931A5-FC15-4274-B95E-F3A2C504D2D0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Validar_Calidad_Datos"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3E6B5973-4E9D-42AC-8E22-B4481F0AC714}"
+          SQLTask:SqlStatementSource="&#xA;-- VALIDACIONES DEL DATA MART CON SSIS&#xA;-- Proyecto Arte y Publicidad E&amp;D&#xA;&#xA;SET NOCOUNT ON;&#xA;&#xA;-- 1. Comprobar base de datos&#xA;IF DB_NAME() &lt;&gt; N'DW_ArtePublicidadED'&#xA;    THROW 51101, 'Base de datos incorrecta.', 1;&#xA;&#xA;-- 2. Verificar que existan datos&#xA;IF NOT EXISTS (&#xA;    SELECT 1 FROM stg.LineasPedido_SSIS&#xA;)&#xA;    THROW 51102, 'La tabla staging esta vacia.', 1;&#xA;&#xA;-- 3. Comprobar registros duplicados&#xA;IF EXISTS (&#xA;    SELECT DetallePedidoID&#xA;    FROM dbo.FactVentas&#xA;    GROUP BY DetallePedidoID&#xA;    HAVING COUNT(*) &gt; 1&#xA;)&#xA;    THROW 51103, 'Existen ventas duplicadas.', 1;&#xA;&#xA;-- 4. Comparar cantidad de registros&#xA;IF (&#xA;    SELECT COUNT_BIG(*)&#xA;    FROM stg.LineasPedido_SSIS&#xA;) &lt;&gt; (&#xA;    SELECT COUNT_BIG(*)&#xA;    FROM dbo.FactVentas&#xA;)&#xA;    THROW 51104, 'No coinciden las cantidades.', 1;&#xA;&#xA;-- 5. Verificar detalles faltantes o adicionales&#xA;IF EXISTS (&#xA;    SELECT DetallePedidoID&#xA;    FROM stg.LineasPedido_SSIS&#xA;    EXCEPT&#xA;    SELECT DetallePedidoID&#xA;    FROM dbo.FactVentas&#xA;)&#xA;    THROW 51105, 'Faltan ventas en FactVentas.', 1;&#xA;&#xA;IF EXISTS (&#xA;    SELECT DetallePedidoID&#xA;    FROM dbo.FactVentas&#xA;    EXCEPT&#xA;    SELECT DetallePedidoID&#xA;    FROM stg.LineasPedido_SSIS&#xA;)&#xA;    THROW 51106, 'Existen ventas adicionales.', 1;&#xA;&#xA;-- 6. Comprobar integridad de dimensiones&#xA;IF EXISTS (&#xA;    SELECT 1&#xA;    FROM dbo.FactVentas AS v&#xA;    LEFT JOIN dbo.DimCliente AS c&#xA;        ON c.ClienteKey = v.ClienteKey&#xA;    LEFT JOIN dbo.DimServicio AS s&#xA;        ON s.ServicioKey = v.ServicioKey&#xA;    LEFT JOIN dbo.DimEmpleado AS e&#xA;        ON e.EmpleadoKey = v.EmpleadoKey&#xA;    LEFT JOIN dbo.DimFecha AS f&#xA;        ON f.FechaKey = v.FechaKey&#xA;    LEFT JOIN dbo.DimEstadoPedido AS ep&#xA;        ON ep.EstadoKey = v.EstadoKey&#xA;    WHERE c.ClienteKey IS NULL&#xA;       OR s.ServicioKey IS NULL&#xA;       OR e.EmpleadoKey IS NULL&#xA;       OR f.FechaKey IS NULL&#xA;       OR ep.EstadoKey IS NULL&#xA;)&#xA;    THROW 51107, 'Existen referencias invalidas.', 1;&#xA;&#xA;-- 7. Comparar montos&#xA;DECLARE @MontoStaging DECIMAL(19,2);&#xA;DECLARE @MontoVentas DECIMAL(19,2);&#xA;&#xA;SELECT @MontoStaging =&#xA;    COALESCE(&#xA;        CONVERT(DECIMAL(19,2),&#xA;            ROUND(SUM(ImporteNeto),2)),0)&#xA;FROM stg.LineasPedido_SSIS;&#xA;&#xA;SELECT @MontoVentas =&#xA;    COALESCE(&#xA;        CONVERT(DECIMAL(19,2),&#xA;            ROUND(SUM(ImporteNeto),2)),0)&#xA;FROM dbo.FactVentas;&#xA;&#xA;IF ABS(@MontoStaging - @MontoVentas) &gt; 0.01&#xA;    THROW 51108, 'Los importes no coinciden.', 1;&#xA;&#xA;PRINT 'VALIDACION CORRECTA';&#xA;PRINT 'Sin duplicados ni registros faltantes.';&#xA;PRINT 'Integridad referencial correcta.';&#xA;PRINT 'Montos de staging y FactVentas coinciden.';&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\SQL_Validar_Calidad_Datos"
+          TopLeft="88.333328507013,22.5333331766393" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

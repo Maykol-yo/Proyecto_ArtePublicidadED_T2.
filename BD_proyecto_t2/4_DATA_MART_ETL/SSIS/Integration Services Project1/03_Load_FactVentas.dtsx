@@ -1,0 +1,775 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/17/2026 12:12:23 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="EDINSON"
+  DTS:CreatorName="Edinson\Maykol"
+  DTS:DTSID="{55654AF9-D2FD-44D7-AE03-9C0A96D067DC}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="10250"
+  DTS:ObjectName="03_Load_FactVentas"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{7B5041B4-E2E2-468C-8187-A9284CD605B9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Cargar_FactVentas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{466342C4-71B5-41E3-830C-D8C50661F272}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_Cargar_FactVentas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Cargar_FactVentas\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactVentas]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{3E6B5973-4E9D-42AC-8E22-B4481F0AC714}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_ArtePublicidad_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PedidoID]"
+                      cachedDataType="i4"
+                      cachedName="PedidoID"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PedidoID]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[PedidoID]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DetallePedidoID]"
+                      cachedDataType="i8"
+                      cachedName="DetallePedidoID"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DetallePedidoID]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[DetallePedidoID]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FechaKey]"
+                      cachedDataType="i4"
+                      cachedName="FechaKey"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FechaKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[FechaKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ClienteKey]"
+                      cachedDataType="i4"
+                      cachedName="ClienteKey"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClienteKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClienteKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ServicioKey]"
+                      cachedDataType="i4"
+                      cachedName="ServicioKey"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ServicioKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServicioKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmpleadoKey]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoKey"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmpleadoKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmpleadoKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EstadoKey]"
+                      cachedDataType="ui1"
+                      cachedName="EstadoKey"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EstadoKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[EstadoKey]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Cantidad]"
+                      cachedDataType="i4"
+                      cachedName="Cantidad"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Cantidad]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cantidad]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PrecioUnitario]"
+                      cachedDataType="numeric"
+                      cachedName="PrecioUnitario"
+                      cachedPrecision="14"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PrecioUnitario]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[PrecioUnitario]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DescuentoPct]"
+                      cachedDataType="numeric"
+                      cachedName="DescuentoPct"
+                      cachedPrecision="5"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DescuentoPct]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[DescuentoPct]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ImporteBruto]"
+                      cachedDataType="numeric"
+                      cachedName="ImporteBruto"
+                      cachedPrecision="28"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImporteBruto]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteBruto]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ImporteDescuento]"
+                      cachedDataType="numeric"
+                      cachedName="ImporteDescuento"
+                      cachedPrecision="28"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImporteDescuento]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteDescuento]" />
+                    <inputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ImporteNeto]"
+                      cachedDataType="numeric"
+                      cachedName="ImporteNeto"
+                      cachedPrecision="28"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImporteNeto]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteNeto]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VentaKey]"
+                      dataType="i8"
+                      name="VentaKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PedidoID]"
+                      dataType="i4"
+                      name="PedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DetallePedidoID]"
+                      dataType="i8"
+                      name="DetallePedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FechaKey]"
+                      dataType="i4"
+                      name="FechaKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClienteKey]"
+                      dataType="i4"
+                      name="ClienteKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ServicioKey]"
+                      dataType="i4"
+                      name="ServicioKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmpleadoKey]"
+                      dataType="i4"
+                      name="EmpleadoKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EstadoKey]"
+                      dataType="ui1"
+                      name="EstadoKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Cantidad]"
+                      dataType="i4"
+                      name="Cantidad" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PrecioUnitario]"
+                      dataType="numeric"
+                      name="PrecioUnitario"
+                      precision="14"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DescuentoPct]"
+                      dataType="numeric"
+                      name="DescuentoPct"
+                      precision="5"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImporteBruto]"
+                      dataType="numeric"
+                      name="ImporteBruto"
+                      precision="28"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImporteDescuento]"
+                      dataType="numeric"
+                      name="ImporteDescuento"
+                      precision="28"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ImporteNeto]"
+                      dataType="numeric"
+                      name="ImporteNeto"
+                      precision="28"
+                      scale="6" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Cargar_FactVentas\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    s.PedidoID,
+    s.DetallePedidoID,
+    f.FechaKey,
+    c.ClienteKey,
+    sv.ServicioKey,
+    e.EmpleadoKey,
+    ep.EstadoKey,
+    s.Cantidad,
+    s.PrecioUnitario,
+    s.DescuentoPct,
+    s.ImporteBruto,
+    s.ImporteDescuento,
+    s.ImporteNeto
+FROM stg.LineasPedido_SSIS AS s
+INNER JOIN dbo.DimFecha AS f
+    ON f.FechaCompleta = s.FechaPedido
+INNER JOIN dbo.DimCliente AS c
+    ON c.ClienteID = s.ClienteID
+INNER JOIN dbo.DimServicio AS sv
+    ON sv.ServicioID = s.ServicioID
+INNER JOIN dbo.DimEmpleado AS e
+    ON e.EmpleadoID = s.EmpleadoID
+INNER JOIN dbo.DimEstadoPedido AS ep
+    ON ep.Estado = s.Estado
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM dbo.FactVentas AS fv
+    WHERE fv.DetallePedidoID = s.DetallePedidoID
+);</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{3E6B5973-4E9D-42AC-8E22-B4481F0AC714}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_ArtePublicidad_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[PedidoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PedidoID]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[PedidoID]"
+                      name="PedidoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[DetallePedidoID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DetallePedidoID]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[DetallePedidoID]"
+                      name="DetallePedidoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[FechaKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FechaKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[FechaKey]"
+                      name="FechaKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClienteKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClienteKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClienteKey]"
+                      name="ClienteKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServicioKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServicioKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServicioKey]"
+                      name="ServicioKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmpleadoKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmpleadoKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmpleadoKey]"
+                      name="EmpleadoKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[EstadoKey]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EstadoKey]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[EstadoKey]"
+                      name="EstadoKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cantidad]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Cantidad]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[Cantidad]"
+                      name="Cantidad"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[PrecioUnitario]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PrecioUnitario]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[PrecioUnitario]"
+                      name="PrecioUnitario"
+                      precision="14"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[DescuentoPct]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DescuentoPct]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[DescuentoPct]"
+                      name="DescuentoPct"
+                      precision="5"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteBruto]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImporteBruto]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteBruto]"
+                      name="ImporteBruto"
+                      precision="28"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteDescuento]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImporteDescuento]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteDescuento]"
+                      name="ImporteDescuento"
+                      precision="28"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteNeto]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImporteNeto]"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImporteNeto]"
+                      name="ImporteNeto"
+                      precision="28"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PedidoID]"
+                      dataType="i4"
+                      name="PedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DetallePedidoID]"
+                      dataType="i8"
+                      name="DetallePedidoID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FechaKey]"
+                      dataType="i4"
+                      name="FechaKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClienteKey]"
+                      dataType="i4"
+                      name="ClienteKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServicioKey]"
+                      dataType="i4"
+                      name="ServicioKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmpleadoKey]"
+                      dataType="i4"
+                      name="EmpleadoKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EstadoKey]"
+                      dataType="ui1"
+                      name="EstadoKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Cantidad]"
+                      dataType="i4"
+                      name="Cantidad" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PrecioUnitario]"
+                      dataType="numeric"
+                      name="PrecioUnitario"
+                      precision="14"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DescuentoPct]"
+                      dataType="numeric"
+                      name="DescuentoPct"
+                      precision="5"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImporteBruto]"
+                      dataType="numeric"
+                      name="ImporteBruto"
+                      precision="28"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImporteDescuento]"
+                      dataType="numeric"
+                      name="ImporteDescuento"
+                      precision="28"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImporteNeto]"
+                      dataType="numeric"
+                      name="ImporteNeto"
+                      precision="28"
+                      scale="6" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PedidoID]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PedidoID]"
+                      name="PedidoID" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DetallePedidoID]"
+                      dataType="i8"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DetallePedidoID]"
+                      name="DetallePedidoID" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FechaKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FechaKey]"
+                      name="FechaKey" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClienteKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClienteKey]"
+                      name="ClienteKey" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServicioKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServicioKey]"
+                      name="ServicioKey" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmpleadoKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmpleadoKey]"
+                      name="EmpleadoKey" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EstadoKey]"
+                      dataType="ui1"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EstadoKey]"
+                      name="EstadoKey" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Cantidad]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Cantidad]"
+                      name="Cantidad" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PrecioUnitario]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PrecioUnitario]"
+                      name="PrecioUnitario"
+                      precision="14"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DescuentoPct]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DescuentoPct]"
+                      name="DescuentoPct"
+                      precision="5"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImporteBruto]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImporteBruto]"
+                      name="ImporteBruto"
+                      precision="28"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImporteDescuento]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImporteDescuento]"
+                      name="ImporteDescuento"
+                      precision="28"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImporteNeto]"
+                      dataType="numeric"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImporteNeto]"
+                      name="ImporteNeto"
+                      precision="28"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Cargar_FactVentas.Paths[OLE DB Source Output]"
+              endId="Package\DFT_Cargar_FactVentas\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT_Cargar_FactVentas\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\DFT_Cargar_FactVentas"
+          TopLeft="29.9999983608724,4.33333330319989" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Cargar_FactVentas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\DFT_Cargar_FactVentas\OLE DB Source"
+          TopLeft="69.1666628875668,24.2666664979193" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\DFT_Cargar_FactVentas\OLE DB Destination"
+          TopLeft="105.833327550855,134.333332399196" />
+        <EdgeLayout
+          Id="Package\DFT_Cargar_FactVentas.Paths[OLE DB Source Output]"
+          TopLeft="145.166662887567,65.8666664979193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.2666646632884,68.4666659012768"
+              Start="0,0"
+              End="46.2666646632884,60.9666659012768">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.2333329506384" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.2333329506384"
+                    Point2="0,34.2333329506384"
+                    Point3="4,34.2333329506384" />
+                  <mssgle:LineSegment
+                    End="42.2666646632884,34.2333329506384" />
+                  <mssgle:CubicBezierSegment
+                    Point1="42.2666646632884,34.2333329506384"
+                    Point2="46.2666646632884,34.2333329506384"
+                    Point3="46.2666646632884,38.2333329506384" />
+                  <mssgle:LineSegment
+                    End="46.2666646632884,60.9666659012768" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Cargar_FactVentas\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Cargar_FactVentas\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
